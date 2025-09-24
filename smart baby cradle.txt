@@ -1,0 +1,67 @@
+#define BLYNK_TEMPLATE_ID "TMPL3seAvuQTs"
+#define BLYNK_TEMPLATE_NAME "SMART BABY CRADLE"
+#define BLYNK_AUTH_TOKEN "a39yi5U9u9KP_Xfh-DCtHZ4wGq0xG8bl"
+#define BLYNK_PRINT Serial
+
+#include<ESP8266WiFi.h>
+#include<BlynkSimpleEsp8266.h>
+#include<Servo.h>
+
+
+char auth[]= BLYNK_AUTH_TOKEN;
+char ssid[]="xxxxWiFi-Username";
+char pass[]="xxxxxxWiFi-Password";
+BlynkTimer timer;
+
+Servo servo1;
+#define Servo_Motor_Pin 2
+#define Buzzer_Pin 5
+#define Water_Sensor_Pin 4
+#define Sound_Sensor_Pin A0
+
+void setup()
+{
+	Serial.begin(9600);
+	servo1.attach(Servo_Motor_Pin);
+	Blynk.begin(auth,ssid,pass);
+	pinMode(Buzzer_Pin,OUTPUT);
+	pinMode(Servo_Motor_Pin,OUTPUT);
+	pinMode(Sound_Sensor_Pin,INPUT);
+	pinMode(Water_Sensor_Pin,INPUT);
+	servo1.write(0);
+}
+
+void loop()
+{
+  Blynk.run();
+	timer.run();
+  int Wet_sen=digitalRead(Water_Sensor_Pin);
+  if(Wet_sen==0)
+	{
+		Serial.println("Blanket is WET.Buzzer is ringing");
+		digitalWrite(Buzzer_Pin,HIGH);
+		delay(2000);
+		digitalWrite(Buzzer_Pin,LOW);
+    delay(2000);
+    Blynk.virtualWrite(V0,"Blanket is Wet.Buzzer is ringing");
+    Blynk.logEvent("wetness_alert","Blanket is Wet.Buzzer is ringing");
+	}
+  else
+  {
+    noTone(Buzzer_Pin);
+  }
+	
+  int Snd_sen=analogRead(Sound_Sensor_Pin);
+  Serial.println(Snd_sen);
+	if(Snd_sen<100)
+	{
+		Serial.println("Sound is Detected from the baby.cradle is swinging.");
+		servo1.write(0);
+		delay(200);
+		servo1.write(120);
+    delay(200);
+    Blynk.virtualWrite(V1,"Baby is Crying.Cradle is Swinging");
+    Blynk.logEvent("sound_alert","Baby is Crying.Cradle is Swinging");
+	}
+	delay(3000);
+}
