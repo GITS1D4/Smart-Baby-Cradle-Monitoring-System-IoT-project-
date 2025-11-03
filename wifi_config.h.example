@@ -1,0 +1,13 @@
+// Copy this file to wifi_config.h and fill in values.
+// DO NOT commit wifi_config.h to GitHub.
+
+#ifndef WIFI_CONFIG_H
+#define WIFI_CONFIG_H
+
+#define WIFI_SSID    "YOUR_WIFI_SSID"
+#define WIFI_PASS    "YOUR_WIFI_PASSWORD"
+
+// Blynk (legacy) AUTH TOKEN (from Blynk app project settings)
+#define BLYNK_AUTH   "YOUR_BLYNK_AUTH_TOKEN"
+
+#endif // WIFI_CONFIG_H

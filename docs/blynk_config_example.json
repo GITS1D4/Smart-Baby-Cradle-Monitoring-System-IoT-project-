@@ -1,0 +1,25 @@
+{
+  "widgets": [
+    {
+      "type": "Notification",
+      "label": "Alert",
+      "vpin": "V0"
+    },
+    {
+      "type": "ValueDisplay",
+      "label": "Sound Level",
+      "vpin": "V3"
+    },
+    {
+      "type": "ValueDisplay",
+      "label": "Wet Flag",
+      "vpin": "V4"
+    },
+    {
+      "type": "LED",
+      "label": "Swinging",
+      "vpin": "V5"
+    }
+  ],
+  "notes": "Legacy Blynk app example. Import widgets manually into your Blynk project and map to the indicated virtual pins."
+}

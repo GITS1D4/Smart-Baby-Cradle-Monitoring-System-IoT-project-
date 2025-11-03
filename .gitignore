@@ -1,0 +1,11 @@
+# Ignore Wi-Fi / secret config
+wifi_config.h
+*.secret
+
+# Arduino build folders
+.build
+build
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
